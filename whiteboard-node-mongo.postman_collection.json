@@ -1,0 +1,965 @@
+{
+	"info": {
+		"_postman_id": "75baeaad-14b6-4d02-ad6e-8b25cbd83f5d",
+		"name": "whiteboard-node-mongo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "empty-database",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9641162-d892-473c-933a-ec89fb2e00eb",
+						"exec": [
+							"pm.test(\"Initially database is Empty\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "populate-database",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6ee3c725-e313-4bdd-af27-e6f4f9ed916a",
+						"exec": [
+							"pm.test(\"Success in Populating DB\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Successfully Populated Database Collections\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/populate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"populate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "truncate-database",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5283474f-4398-42a4-abd2-e93da374f20e",
+						"exec": [
+							"pm.test(\"Success in Truncating DB\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Successfully Truncated Database Collections\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-alice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74cf0563-a153-4cb1-896b-d3b6fb155ba9",
+						"exec": [
+							"pm.test(\"Created Student Named Alice\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.firstName).to.eql(\"Alice\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 123,\r\n\t\t\"firstName\": \"Alice\",\r\n\t\t\"lastName\": \"Wonderland\",\r\n\t\t\"username\": \"alice\",\r\n\t\t\"password\": \"alice\",\r\n\t\t\"gradYear\": 2020,\r\n\t\t\"scholarship\": 15000\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-bob",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74cf0563-a153-4cb1-896b-d3b6fb155ba9",
+						"exec": [
+							"pm.test(\"Created Student Named Bob\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.firstName).to.eql(\"Bob\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 234,\r\n\t\t\"firstName\": \"Bob\",\r\n\t\t\"lastName\": \"Hope\",\r\n\t\t\"username\": \"bob\",\r\n\t\t\"password\": \"bob\",\r\n\t\t\"gradYear\": 2021,\r\n\t\t\"scholarship\": 12000\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "two-students-created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9641162-d892-473c-933a-ec89fb2e00eb",
+						"exec": [
+							"pm.test(\"Initially database is Empty\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-question-321",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d65fc52-d43d-4dec-b59c-6f257bd7d0b7",
+						"exec": [
+							"pm.test(\"Check Question Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.question).to.eql(\"Is the following schema valid?\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 321,\r\n\t\t\"question\": \"Is the following schema valid?\",\r\n\t\t\"points\": 10,\r\n\t\t\"questionType\": \"TRUE_FALSE\",\r\n\t\t\"trueFalse\": {\r\n\t\t\t\"isTrue\": false\r\n\t\t}\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-question-432",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d65fc52-d43d-4dec-b59c-6f257bd7d0b7",
+						"exec": [
+							"pm.test(\"Check Question Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.question).to.eql(\"DAO stands for Dynamic Access Object.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 432,\r\n\t\t\"question\": \"DAO stands for Dynamic Access Object.\",\r\n\t\t\"points\": 10,\r\n\t\t\"questionType\": \"TRUE_FALSE\",\r\n\t\t\"trueFalse\": {\r\n\t\t\t\"isTrue\": false\r\n\t\t}\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-question-543",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d65fc52-d43d-4dec-b59c-6f257bd7d0b7",
+						"exec": [
+							"pm.test(\"Check Question Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.question).to.eql(\"What does JPA stand for?\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 543,\r\n\t\t\"question\": \"What does JPA stand for?\",\r\n\t\t\"points\": 10,\r\n\t\t\"questionType\": \"MULTIPLE_CHOICE\",\r\n\t\t\"multipleChoice\": {\r\n\t\t\t\"choices\": [\r\n\t\t\t\t\"Java Persistence API\",\r\n\t\t\t\t\"Java Persisted Application\",\r\n\t\t\t\t\"JavaScript Persistence API\",\r\n\t\t\t\t\"JSON Persistent Associations\"\r\n\t\t\t],\r\n\t\t\t\"correct\": 1\r\n\t\t}\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-question-654",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d65fc52-d43d-4dec-b59c-6f257bd7d0b7",
+						"exec": [
+							"pm.test(\"Check Question Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.question).to.eql(\"What does ORM stand for?\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 654,\r\n\t\t\"question\": \"What does ORM stand for?\",\r\n\t\t\"points\": 10,\r\n\t\t\"questionType\": \"MULTIPLE_CHOICE\",\r\n\t\t\"multipleChoice\": {\r\n\t\t\t\"choices\": [\r\n\t\t\t\t\"Object Relational Model\",\r\n\t\t\t\t\"Object Relative Markup\",\r\n\t\t\t\t\"Object Reflexive Model\",\r\n\t\t\t\t\"Object Relational Mapping\"\r\n\t\t\t],\r\n\t\t\t\"correct\": 4\r\n\t\t}\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "four-questions-created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9641162-d892-473c-933a-ec89fb2e00eb",
+						"exec": [
+							"pm.test(\"Four Questions Created\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(4);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-123",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.trueFalseAnswer).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 123,\r\n\t\t\"trueFalseAnswer\": true\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/123/questions/321/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"123",
+						"questions",
+						"321",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-234",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.trueFalseAnswer).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 234,\r\n\t\t\"trueFalseAnswer\": false\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/123/questions/432/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"123",
+						"questions",
+						"432",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-345",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.multipleChoiceAnswer).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 345,\r\n\t\t\"multipleChoiceAnswer\": 1\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/123/questions/543/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"123",
+						"questions",
+						"543",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-456",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.multipleChoiceAnswer).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 456,\r\n\t\t\"multipleChoiceAnswer\": 2\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/123/questions/654/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"123",
+						"questions",
+						"654",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-567",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.trueFalseAnswer).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 567,\r\n\t\t\"trueFalseAnswer\": false\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/234/questions/321/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"234",
+						"questions",
+						"321",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-678",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.trueFalseAnswer).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 678,\r\n\t\t\"trueFalseAnswer\": true\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/234/questions/432/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"234",
+						"questions",
+						"432",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-789",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.multipleChoiceAnswer).to.eql(3);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 789,\r\n\t\t\"multipleChoiceAnswer\": 3\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/234/questions/543/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"234",
+						"questions",
+						"543",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-answer-890",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da3ce80-522a-4503-9e57-3f858861c93d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.multipleChoiceAnswer).to.eql(4);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\t\"_id\": 890,\r\n\t\t\"multipleChoiceAnswer\": 4\r\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/students/234/questions/654/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students",
+						"234",
+						"questions",
+						"654",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eight-answers-created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9641162-d892-473c-933a-ec89fb2e00eb",
+						"exec": [
+							"pm.test(\"Four Questions Created\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(8);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "truncate-database Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5283474f-4398-42a4-abd2-e93da374f20e",
+						"exec": [
+							"pm.test(\"Success in Truncating DB\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Successfully Truncated Database Collections\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "empty-database Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9641162-d892-473c-933a-ec89fb2e00eb",
+						"exec": [
+							"pm.test(\"Initially database is Empty\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
